@@ -1,17 +1,17 @@
-# Simple Todo App
+# Interactive Todo App
 
-Give a brief description of the project here. Feel free to give it a different name.
+Interactive application where users can add and delete "to-do" items to build a visual checklist.
 
 ## Functionality
 
-Give a more detailed explanation of the project and its functionality.
+Via Javascript, users are able to interact with the application and manually type in todo items, checkmark them once completed or delete the item altogether.
 
 ## Technology
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+HTML, CSS, Javascript
 
 ## Deployment
 
 This project is deployed on GitHub Pages:
 
-- ADD LINK HERE
+https://github.com/VanessaK21/se_project_todo-app

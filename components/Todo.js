@@ -13,7 +13,7 @@ class Todo {
       this._todoElement.remove();
     });
 
-    _generateDates();
+    _generateDatesElement();
     this._dueDate = new Date(this._data.date);
     if (!isNaN(this._dueDate)) {
       this._todoDate.textContent = `Due: ${dueDate.toLocaleString("en-US", {
@@ -30,7 +30,7 @@ class Todo {
     this._todoCheckboxEl.id = `todo-${this._data.id}`;
     this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
 
-    getView();
+    todo.getView();
     this._todoElement = this._templateElement.content
       .querySelector(".todo")
       .cloneNode(true);
@@ -47,6 +47,7 @@ class Todo {
     this._generateDates();
 
     return this._todoElement;
+    todo.resetValidation();
   }
 }
 
