@@ -13,24 +13,27 @@ class Todo {
       this._todoElement.remove();
     });
 
-    _generateDatesElement();
+    this._generateDatesElement();
     this._dueDate = new Date(this._data.date);
     if (!isNaN(this._dueDate)) {
-      this._todoDate.textContent = `Due: ${dueDate.toLocaleString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })}`;
+      this._todoDate.textContent = `Due: ${this._dueDate.toLocaleString(
+        "en-US",
+        {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        }
+      )}`;
     }
 
-    _generateCheckboxEl();
+    this._generateCheckboxEl();
     this._todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
     this._todoLabel = this._todoElement.querySelector(".todo__label");
     this._todoCheckboxEl.checked = this._data.completed;
     this._todoCheckboxEl.id = `todo-${this._data.id}`;
     this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
 
-    todo.getView();
+    this._todo.getView();
     this._todoElement = this._templateElement.content
       .querySelector(".todo")
       .cloneNode(true);
@@ -47,7 +50,7 @@ class Todo {
     this._generateDates();
 
     return this._todoElement;
-    todo.resetValidation();
+    this._todo.resetValidation();
   }
 }
 

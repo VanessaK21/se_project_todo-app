@@ -13,12 +13,12 @@ class FormValidator {
     if (!inputElement.validity.valid) {
       this._showInputError(
         this._formElement,
-        inputElement,
-        inputElement.validationMessage,
+        this._inputElement,
+        this._inputElement.validationMessage,
         this._settings
       );
     } else {
-      hideInputError(formElement, inputElement, settings);
+      hideInputError(this._formElement, this._inputElement, this._settings);
     }
   }
 
@@ -44,8 +44,16 @@ class FormValidator {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-    setEventListeners();
+    this._setEventListeners();
   }
-  resetValidation();
-}
+  resetValidation() {}
+
+
+  _showInputError() {}
+
+_toggleButtonState() {
+    _checkInputValidity(this._formElement)
+    classList.add(this._submitButtonSelector)
+    }
+
 export default FormValidator;
