@@ -13,7 +13,7 @@ class Todo {
       this._todoElement.remove();
     });
 
-    this._generateDatesElement();
+    _generateDatesElement(){
     this._dueDate = new Date(this._data.date);
     if (!isNaN(this._dueDate)) {
       this._todoDate.textContent = `Due: ${this._dueDate.toLocaleString(
@@ -25,7 +25,7 @@ class Todo {
         }
       )}`;
     }
-
+  }
     this._generateCheckboxEl();
     this._todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
     this._todoLabel = this._todoElement.querySelector(".todo__label");
