@@ -9,11 +9,10 @@ class Todo {
       this._data.completed = !this._data.completed;
     });
 
-    this._todoDeleteBtn.addEventListener("click", () => {
+    this._todoDeleteBtn.addEventListener("click", ()) => 
       this._todoElement.remove();
-    });
 
-    _generateDatesElement(){
+         _generateDatesElement() 
     this._dueDate = new Date(this._data.date);
     if (!isNaN(this._dueDate)) {
       this._todoDate.textContent = `Due: ${this._dueDate.toLocaleString(
@@ -24,9 +23,10 @@ class Todo {
           day: "numeric",
         }
       )}`;
+    };
     }
   }
-    this._generateCheckboxEl();
+  _generateCheckboxEl() {
     this._todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
     this._todoLabel = this._todoElement.querySelector(".todo__label");
     this._todoCheckboxEl.checked = this._data.completed;

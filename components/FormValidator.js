@@ -8,23 +8,33 @@ class FormValidator {
     this._formElement = formElement;
   }
 
-
-      _toggleButtonState() {    
-      const isFormValid = this._formElement.checkValidity();
-        this._submitButtonSelector.classList.remove(this._submitButtonSelector);
-        this._inactiveButtonClass.classList.add(this._inactiveButtonClass);
-}
+  _toggleButtonState() {
+    const isFormValid = this._formElement.checkValidity();
+    this._submitButtonSelector.classList.remove(this._submitButtonSelector);
+    this._inactiveButtonClass.classList.add(this._inactiveButtonClass);
+  }
 
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(
-        this._showInputError(inputElement, this._inputErrorClass, this._errorClass));
+        this._showInputError(
+          inputElement,
+          this._inputErrorClass,
+          this._errorClass
+        )
+      );
     } else {
-      hideInputError(this._showInputError(inputElement, this._inputErrorClass, this._errorClass));
+      hideInputError(
+        this._showInputError(
+          inputElement,
+          this._inputErrorClass,
+          this._errorClass
+        )
+      );
     }
   }
 
-  this._setEventListeners() {
+  _setEventListeners() {
     this._inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );
@@ -46,16 +56,28 @@ class FormValidator {
     });
     this._setEventListeners();
   }
-  
- resetValidation() {
-  const inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
-  
-  inputList.forEach((inputElement) => {
-    this._hideInputError(inputElement);
-  });
 
-  this._toggleButtonState();
+  resetValidation() {
+    const inputList = Array.from(
+      this._formElement.querySelectorAll(this._settings.inputSelector)
+    );
+
+    inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+
+    this._toggleButtonState();
+  }
+  _hideInputError(inputElement) {
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error`
+    );
+
+    inputElement.classList.remove(this._settings.inputErrorClass);
+    errorElement.classList.remove(this._settings.errorClass);
+
+    errorElement.textContent = ""; // ← This line clears the text!
+  }
 }
-  _showInputError() {}
 
-export default FormValidator;
+export default FormValidator();
