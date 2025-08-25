@@ -80,4 +80,4 @@ class FormValidator {
   }
 }
 
-export default FormValidator();
+export default FormValidator;
