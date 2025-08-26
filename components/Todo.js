@@ -37,10 +37,6 @@ class Todo {
     this._todoCheckboxEl.id = `todo-${this._data.id}`;
     this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
 
-    this._todoElement = this._templateElement.content
-      .querySelector(".todo")
-      .cloneNode(true);
-
     const todoNameEl = this._todoElement.querySelector(".todo__name");
 
     const todoDate = this._todoElement.querySelector(".todo__date");
