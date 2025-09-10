@@ -26,21 +26,14 @@ const addTodoPopup = new PopupWithForm({
 addTodoPopup.setEventListeners();
 
 const section = new Section({
-  items: [],
+  initialTodos: [],
+  section.renderItems();
   renderer: () => {
-    const todo = generateTodo(item);
-    todosList.append(todo);
-  },
+    item parameter: e.g. (item) => { const todoEl = generateTodo(item); section.addItem(todoEl); 
   containerSelector: ".todos__list",
-});
-
-const openModal = (modal) => {
-  modal.classList.add("popup_visible");
 };
-
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
+  }
+}
 
 function handleCheck(completed) {
   todoCounter.updateCompleted(completed);
@@ -58,9 +51,6 @@ const generateTodo = (data) => {
   return todoElement;
 };
 
-function handleEscapeClose(evt) {
-  if (evt.key === "Escape") openModal.classList.remove("popup_visible");
-}
 //find the currently opened modal and close it//
 
 addTodoButton.addEventListener("click", () => {
@@ -87,8 +77,9 @@ addTodoButton.addEventListener("click", () => {
 //addTodoPopup.close();
 //});
 
-initialTodos.forEach((item) => {
-  generateTodo(item);
+initialTodos.forEach((section) => {
+  section.renderItems();
+  todosList.append();
 });
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
