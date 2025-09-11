@@ -39,7 +39,7 @@ class Todo {
   };
 
   _remove = () => {
-    this._element?.remove();
+    this._todoElement?.remove();
   };
 
   getView() {

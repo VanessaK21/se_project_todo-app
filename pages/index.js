@@ -10,31 +10,12 @@ import TodoCounter from "../components/TodoCounter.js";
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopupEl = document.querySelector("#add-todo-popup");
 const addTodoForm = document.forms["add-todo-form"];
-const addTodoCloseBtn = addTodoPopupEl.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
 
+// Initialize todo counter with initial todos
 const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 
-const addTodoPopup = new PopupWithForm({
-  popupSelector: "#add-todo-popup",
-  handleFormSubmit: (inputValues) => {
-    const date = new Date(dateInput);
-    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-  },
-});
-
-addTodoPopup.setEventListeners();
-
-const section = new Section({
-  initialTodos: [],
-  section.renderItems();
-  renderer: () => {
-    item parameter: e.g. (item) => { const todoEl = generateTodo(item); section.addItem(todoEl); 
-  containerSelector: ".todos__list",
-};
-  }
-}
-
+// Handlers for checkbox and delete actions
 function handleCheck(completed) {
   todoCounter.updateCompleted(completed);
 }
@@ -45,42 +26,51 @@ function handleDelete(completed) {
   }
 }
 
+// Generates a Todo DOM element from data
 const generateTodo = (data) => {
   const todo = new Todo(data, "#todo-template", handleCheck, handleDelete);
-  const todoElement = todo.getView();
-  return todoElement;
+  return todo.getView();
 };
 
-//find the currently opened modal and close it//
+// Section instance to manage rendering todos
+const section = new Section({
+  items: initialTodos, // Pass initial todos here with correct key 'items'
+  renderer: (item) => {
+    const todoEl = generateTodo(item);
+    section.addItem(todoEl);
+  },
+  containerSelector: ".todos__list",
+});
 
+// Render initial todos
+section.renderItems();
+
+// Popup for adding new todos
+const addTodoPopup = new PopupWithForm({
+  popupSelector: "#add-todo-popup",
+  handleFormSubmit: (inputValues) => {
+    const { name, date: dateInput } = inputValues;
+    const date = new Date(dateInput);
+    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+
+    const id = uuidv4();
+    const todoData = { name, date, id, completed: false };
+    const todoEl = generateTodo(todoData);
+
+    section.addItem(todoEl);
+    todoCounter.updateCompleted(false); // New todo is initially not completed
+
+    addTodoPopup.close();
+  },
+});
+
+addTodoPopup.setEventListeners();
+
+// Open popup on button click
 addTodoButton.addEventListener("click", () => {
   addTodoPopup.open();
 });
 
-// addTodoCloseBtn.addEventListener("click", () => {
-//   addTodoPopup.close();
-// });
-
-//addTodoForm.addEventListener("submit", (evt) => {
-//evt.preventDefault();
-//const name = evt.target.name.value;
-//const dateInput = evt.target.date.value;
-
-//const date = new Date(dateInput);
-//date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-
-//const id = uuidv4();
-//const values = { name, date, id };
-//const todo = generateTodo(values);
-//todosList.append(todo);
-
-//addTodoPopup.close();
-//});
-
-initialTodos.forEach((section) => {
-  section.renderItems();
-  todosList.append();
-});
-
+// Initialize form validation for the add todo form
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
 newTodoValidator.enableValidation();
