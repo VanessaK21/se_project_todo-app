@@ -8,9 +8,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import TodoCounter from "../components/TodoCounter.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
-const addTodoPopupEl = document.querySelector("#add-todo-popup");
 const addTodoForm = document.forms["add-todo-form"];
-const todosList = document.querySelector(".todos__list");
 
 // Initialize todo counter with initial todos
 const todoCounter = new TodoCounter(initialTodos, ".counter__text");
@@ -58,7 +56,8 @@ const addTodoPopup = new PopupWithForm({
     const todoEl = generateTodo(todoData);
 
     section.addItem(todoEl);
-    todoCounter.updateCompleted(false); // New todo is initially not completed
+    todoCounter.updateCompleted(true); // New todo is initially not completed
+    todoCounter.updateTotal(true);
 
     addTodoPopup.close();
   },
